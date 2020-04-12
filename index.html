@@ -48,10 +48,15 @@
             deck.push(suits[i] + " " + cards[j])
           }
         }
+        shuffle(deck)
         sessionStorage.setItem("deck", JSON.stringify(deck))
         for (let i = 0; i < 52; i++) {
           $('#table').append($('<li>').text(deck[i]));
         }
+      }
+
+      function shuffle(array) {
+        array.sort(() => Math.random() - 0.5);
       }
 
       function drawUsers() {
