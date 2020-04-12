@@ -20,9 +20,10 @@
   </head>
   <body>
     <ul id="messages" style="width:20%; float:left;"></ul>
-    <span id="main" style="width:60%; float:right; display:inline-block; margin-bottom:40px">
+    <span id="main" style="width:60%; float:right; display:inline-block;">
       <ul id="table" style="list-style-type: none;"></ul>
-      <ul id="info" style="list-style-type: none;">
+      <ul id="info" style="list-style-type: none;  margin-bottom:40px;">
+          <li>deal</li>
           <li>adduser "user"</li>
           <li>removeuser "user"</li>
           <li>addmoney "user" "amount"</li>
@@ -133,7 +134,7 @@
             sessionStorage.setItem("bank", JSON.stringify(bank))
             drawUsers()
           } else if (msg.includes("deal")) {
-
+            deal()
           }
           $('#messages').append($('<li>').text(msg));
           window.scrollTo(0, document.body.scrollHeight);
