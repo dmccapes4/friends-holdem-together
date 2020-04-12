@@ -40,11 +40,11 @@
               users.push(user)
             }
             sessionStorage.setItem("users", JSON.stringify(users))
-            while($('#users').length > 0) {
-	             $('#users').removeChild($('#users').firstChild);
-            }
+            var usersList = document.getElementById("users");
+            while(usersList.firstChild) usersList.removeChild(usersList.firstChild);
+
             for (let i = 0; i < users.length; i++) {
-              $('#users').append($('<li>').text(users[i]));
+              usersList.append($('<li>').text(users[i]));
             }
           }
           $('#messages').append($('<li>').text(msg));
