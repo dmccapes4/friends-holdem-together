@@ -32,7 +32,7 @@
         });
         socket.on('chat message', function(msg){
           if (msg.includes("adduser:")) {
-            var user = msg.substring(10)
+            var user = msg.substring(9)
             var users = JSON.parse(sessionStorage.getItem("users"))
             if (users == null) {
               users = [user]
