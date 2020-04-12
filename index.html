@@ -12,11 +12,23 @@
       #messages li { padding: 5px 10px; }
       #messages li:nth-child(odd) { background: #eee; }
       #messages { margin-bottom: 40px }
+      #info {
+        position: absolute;
+        bottom: 0;
+      }
     </style>
   </head>
   <body>
     <ul id="messages" style="width:20%; float:left;"></ul>
-    <ul id="table" style="width:10%; float:right; list-style-type: none;"></ul>
+    <span id="main" style="width:10%; float:right;">
+      <ul id="table" style="list-style-type: none;"></ul>
+      <ul id="info" style="list-style-type: none;">
+          <li>adduser "user"</li>
+          <li>removeuser "user"</li>
+          <li>addmoney "user" "amount"</li>
+          <li>removemoney "user" "amount"</li>
+      </ul>
+  </span>
     <ul id="users" style="width:10%; float:right; list-style-type: none;"></ul>
     <form action="">
       <input id="m" autocomplete="off" /><button>Send</button>
