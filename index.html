@@ -30,7 +30,7 @@
         while(usersList.firstChild) usersList.removeChild(usersList.firstChild);
 
         var bank = JSON.parse(sessionStorage.getItem("bank"))
-        if bank == null {
+        if (bank == null) {
           bank = "{}"
         }
         for (let i = 0; i < users.length; i++) {
