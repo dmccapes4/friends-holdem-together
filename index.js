@@ -20,7 +20,7 @@ io.on('connection', function(socket){
 app.post('/users', function(req, res) {
   // io.sockets.in(req.body.user).emit('chat message', {msg: 'hello'});
   res.statusCode = 200;
-  res.send(req.toString())
+  res.send(req.user)
 });
 
 http.listen(port, function(){
