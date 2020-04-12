@@ -38,7 +38,7 @@
           if (bank.getItem(users[i]) != null) {
             money = bank.getItem(users[i])
           } else {
-            bank.setItem(users[i], 0)
+            bank[users[i]] = 0
           }
           $('#users').append($('<li>').text(users[i] + " " + money));
         }
