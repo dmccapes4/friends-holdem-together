@@ -15,8 +15,8 @@
     </style>
   </head>
   <body>
-    <ul id="messages" style="width:90% float:left"></ul>
-    <ul id="users" style="width:10% float:right"></ul>
+    <ul id="messages" style="width:90%; float:left;"></ul>
+    <ul id="users" style="width:10%; float:right;"></ul>
     <form action="">
       <input id="m" autocomplete="off" /><button>Send</button>
     </form>
@@ -40,7 +40,12 @@
               users.push(user)
             }
             sessionStorage.setItem("users", JSON.stringify(users))
-            $('#users').append($('<li>').text(user));
+            while($('#users').length > 0) {
+	             $('#users').removeChild(lis[0]);
+            }
+            for (let i = 0; i < users.length; i++) {
+              $('#users').append($('<li>').text(users[i]));
+            }
           }
           $('#messages').append($('<li>').text(msg));
           window.scrollTo(0, document.body.scrollHeight);
