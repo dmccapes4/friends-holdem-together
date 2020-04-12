@@ -15,6 +15,7 @@
     </style>
   </head>
   <body>
+    <ul id="users"></ul>
     <ul id="messages"></ul>
     <form action="">
       <input id="m" autocomplete="off" /><button>Send</button>
@@ -39,6 +40,7 @@
               users.push(user)
             }
             sessionStorage.setItem("users", JSON.stringify(users))
+            $('#users').append($('<li>').text(user));
           }
           $('#messages').append($('<li>').text(msg));
           window.scrollTo(0, document.body.scrollHeight);
