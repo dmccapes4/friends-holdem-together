@@ -38,7 +38,7 @@
             } else if (!users.includes(user)) {
               users.push(user)
             }
-            sessionStorage.setItem("users", users)
+            sessionStorage.setItem("users", JSON.stringify(users))
           }
           $('#messages').append($('<li>').text(msg));
           window.scrollTo(0, document.body.scrollHeight);
