@@ -15,7 +15,8 @@
     </style>
   </head>
   <body>
-    <ul id="messages" style="width:90%; float:left;"></ul>
+    <ul id="messages" style="width:20%; float:left;"></ul>
+    <ul id="table" style="width:10%; float:right; list-style-type: none;"></ul>
     <ul id="users" style="width:10%; float:right; list-style-type: none;"></ul>
     <form action="">
       <input id="m" autocomplete="off" /><button>Send</button>
@@ -23,6 +24,25 @@
     <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script>
+      function drawUsers(users) {
+        sessionStorage.setItem("users", JSON.stringify(users))
+        var usersList = document.getElementById("users");
+        while(usersList.firstChild) usersList.removeChild(usersList.firstChild);
+
+        var bank = JSON.parse(sessionStorage.getItem("bank"))
+        if bank == null {
+          bank = "{}"
+        }
+        for (let i = 0; i < users.length; i++) {
+          var money = 0
+          if (bank.getItem(users[i]) != null) {
+            money = bank.getItem(users[i])
+          } else {
+            bank.setItem(users[i], 0)
+          }
+          $('#users').append($('<li>').text(users[i] + " " + money));
+        }
+      }
       $(function () {
         var socket = io();
         $('form').submit(function(){
@@ -39,25 +59,13 @@
             } else if (!users.includes(user)) {
               users.push(user)
             }
-            sessionStorage.setItem("users", JSON.stringify(users))
-            var usersList = document.getElementById("users");
-            while(usersList.firstChild) usersList.removeChild(usersList.firstChild);
-
-            for (let i = 0; i < users.length; i++) {
-              $('#users').append($('<li>').text(users[i]));
-            }
+            drawUsers(users)
           } else if (msg.includes("removeuser")) {
             var user = msg.substring(11)
             var users = JSON.parse(sessionStorage.getItem("users"))
             if (users != null) {
               users = users.filter(e => e !== user)
-              sessionStorage.setItem("users", JSON.stringify(users))
-              var usersList = document.getElementById("users");
-              while(usersList.firstChild) usersList.removeChild(usersList.firstChild);
-
-              for (let i = 0; i < users.length; i++) {
-                $('#users').append($('<li>').text(users[i]));
-              }
+              drawUsers(users)
             }
           }
           $('#messages').append($('<li>').text(msg));
