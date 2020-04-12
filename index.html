@@ -74,12 +74,12 @@
           } else if (msg.includes("addmoney")) {
             var splitCommand = msg.split(" ")
             var user = splitCommand[1]
-            var amount = splitCommand[2].parseInt()
+            var amount = parseInt(splitCommand[2], 10)
             var bank = JSON.parse(sessionStorage.getItem("bank"))
             if (bank == null) {
               bank = {}
             }
-            var usersMoney = bank[user].parseInt()
+            var usersMoney = parseInt(bank[user], 10)
             if (usersMoney == null) {
               usersMoney = 0
             }
@@ -90,12 +90,12 @@
           } else if (msg.includes("removemoney")) {
             var splitCommand = msg.split(" ")
             var user = splitCommand[1]
-            var amount = splitCommand[2]
+            var amount = parseInt(splitCommand[2], 10)
             var bank = JSON.parse(sessionStorage.getItem("bank"))
             if (bank == null) {
               bank = {}
             }
-            var usersMoney = bank[user]
+            var usersMoney = parseInt(bank[user], 10)
             if (usersMoney == null) {
               usersMoney = 0
             }
