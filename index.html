@@ -50,9 +50,19 @@
         }
         shuffle(deck)
         sessionStorage.setItem("deck", JSON.stringify(deck))
-        for (let i = 0; i < 52; i++) {
-          $('#table').append($('<li>').text(deck[i]));
+        var users = JSON.parse(sessionStorage.getItem("users"))
+        var table = {}
+        for (let numDealt = 0; numDealt < 2; numDealt++) {
+          for (let i = 0; i < users.length; i++) {
+            if (numDealt == 0) {
+              table[users[i]] = deck.pop() + " "
+            } else {
+              table[users[i]] += deck.pop()
+            }
+          }
         }
+        sessionStorage.setItem("table", JSON.stringify(table))
+        sessionStorage.setItem("deck", JSON.stringify(deck))
       }
 
       function shuffle(array) {
