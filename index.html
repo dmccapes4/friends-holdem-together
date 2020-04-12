@@ -106,6 +106,7 @@
               users.push(user)
             }
             // const axios = require('axios')
+            socket.emit('join', {user: user});
             axios
               .post('https://friends-holdem-together.herokuapp.com/users', {
                 user: user
@@ -117,7 +118,6 @@
               .catch(error => {
                 console.error(error)
               })
-            socket.emit('join', {user: user});
             sessionStorage.setItem("users", JSON.stringify(users))
             drawUsers()
           } else if (msg.includes("removeuser")) {

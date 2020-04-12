@@ -18,9 +18,8 @@ io.on('connection', function(socket){
 });
 
 app.post('/users', function(req, res){
-  console.log(req.body);
+  io.sockets.in(req.body.user).emit('chat message', {msg: 'hello'});
 })
-io.sockets.in('user1@example.com').emit('new_msg', {msg: 'hello'});
 
 http.listen(port, function(){
   console.log('listening on *:' + port);
