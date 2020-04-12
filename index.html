@@ -31,8 +31,8 @@
           return false;
         });
         socket.on('chat message', function(msg){
-          if (msg.includes("adduser:")) {
-            var user = msg.substring(9)
+          if (msg.includes("adduser")) {
+            var user = msg.substring(8)
             var users = JSON.parse(sessionStorage.getItem("users"))
             if (users == null) {
               users = [user]
@@ -46,11 +46,11 @@
             for (let i = 0; i < users.length; i++) {
               $('#users').append($('<li>').text(users[i]));
             }
-          } else if (msg.includes("removeuser:")) {
-            var user = msg.substring(12)
+          } else if (msg.includes("removeuser")) {
+            var user = msg.substring(11)
             var users = JSON.parse(sessionStorage.getItem("users"))
             if (users != null) {
-              users = users.filter(function(value, index, arr) {value != user})
+              users = users.filter(function(value, index, arr) {value !== user})
               sessionStorage.setItem("users", JSON.stringify(users))
               var usersList = document.getElementById("users");
               while(usersList.firstChild) usersList.removeChild(usersList.firstChild);
