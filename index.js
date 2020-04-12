@@ -11,7 +11,16 @@ io.on('connection', function(socket){
   socket.on('chat message', function(msg){
     io.emit('chat message', msg);
   });
+
+  socket.on('join', function (data) {
+    socket.join(data.user);
+  });
 });
+
+app.post('/users', function(req, res){
+  console.log(req.body);
+})
+io.sockets.in('user1@example.com').emit('new_msg', {msg: 'hello'});
 
 http.listen(port, function(){
   console.log('listening on *:' + port);

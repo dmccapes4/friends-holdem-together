@@ -45,7 +45,7 @@
         var cards = ["Ace","King","Queen","Jack","Ten","Nine","Eight","Seven","Six","Five","Four","Three","Two"]
         for (let i = 0; i < 4; i++) {
           for (let j = 0; j < 13; j++) {
-            deck.push(suits[i] + " " + cards[j])
+            deck.push(cards[j] + " " + suits[i])
           }
         }
         shuffle(deck)
@@ -55,7 +55,7 @@
         for (let numDealt = 0; numDealt < 2; numDealt++) {
           for (let i = 0; i < users.length; i++) {
             if (numDealt == 0) {
-              table[users[i]] = deck.pop() + " "
+              table[users[i]] = deck.pop() + ", "
             } else {
               table[users[i]] += deck.pop()
             }
@@ -106,6 +106,19 @@
             } else if (!users.includes(user)) {
               users.push(user)
             }
+            const axios = require('axios')
+            axios
+              .post('https://friends-holdem-together.herokuapp.com/users', {
+                user: user
+              })
+              .then(res => {
+                console.log(`statusCode: ${res.statusCode}`)
+                console.log(res)
+              })
+              .catch(error => {
+                console.error(error)
+              })
+            socket.emit('join', {user: user});
             sessionStorage.setItem("users", JSON.stringify(users))
             drawUsers()
           } else if (msg.includes("removeuser")) {
