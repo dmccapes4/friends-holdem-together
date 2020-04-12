@@ -16,7 +16,7 @@
   </head>
   <body>
     <ul id="messages" style="width:90%; float:left;"></ul>
-    <ul id="users" style="width:10%; float:right;"></ul>
+    <ul id="users" style="width:10%; float:right; list-style-type: none;"></ul>
     <form action="">
       <input id="m" autocomplete="off" /><button>Send</button>
     </form>
@@ -44,7 +44,7 @@
             while(usersList.firstChild) usersList.removeChild(usersList.firstChild);
 
             for (let i = 0; i < users.length; i++) {
-              usersList.append($('<li>').text(users[i]));
+              $('#users').append($('<li>').text(users[i]));
             }
           }
           $('#messages').append($('<li>').text(msg));
