@@ -30,6 +30,16 @@
           return false;
         });
         socket.on('chat message', function(msg){
+          if (msg.includes("username:")) {
+            var user = msg.substring(10)
+            var users = JSON.parse(sessionStorage.getItem("users"))
+            if (users == null) {
+              users = [user]
+            } else if (!users.includes(user)) {
+              users.append(user)
+            }
+            sessionStorage.setItem("users", users)
+          }
           $('#messages').append($('<li>').text(msg));
           window.scrollTo(0, document.body.scrollHeight);
         });
