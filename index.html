@@ -25,7 +25,6 @@
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script>
       function drawUsers(users) {
-        sessionStorage.setItem("users", JSON.stringify(users))
         var usersList = document.getElementById("users");
         while(usersList.firstChild) usersList.removeChild(usersList.firstChild);
 
@@ -67,6 +66,7 @@
             var users = JSON.parse(sessionStorage.getItem("users"))
             if (users != null) {
               users = users.filter(e => e !== user)
+              sessionStorage.setItem("users", JSON.stringify(users))
               drawUsers(users)
             }
           } else if (msg.includes("addmoney")) {
@@ -83,6 +83,7 @@
             }
             usersMoney = usersMoney + amount
             bank[user] = usersMoney
+            sessionStorage.setItem("users", JSON.stringify(users))
             sessionStorage.setItem("bank", JSON.stringify(bank))
             drawUsers()
           } else if (msg.includes("removemoney")) {
