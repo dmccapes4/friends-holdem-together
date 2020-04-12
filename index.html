@@ -50,7 +50,7 @@
             var user = msg.substring(11)
             var users = JSON.parse(sessionStorage.getItem("users"))
             if (users != null) {
-              users = users.filter(function(value, index, arr) {value !== user})
+              users = users.filter(e => e !== user)
               sessionStorage.setItem("users", JSON.stringify(users))
               var usersList = document.getElementById("users");
               while(usersList.firstChild) usersList.removeChild(usersList.firstChild);
