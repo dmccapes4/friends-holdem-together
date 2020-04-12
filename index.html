@@ -31,7 +31,7 @@
 
         var bank = JSON.parse(sessionStorage.getItem("bank"))
         if (bank == null) {
-          bank = "{}"
+          bank = {}
         }
         for (let i = 0; i < users.length; i++) {
           var money = 0
@@ -42,6 +42,7 @@
           }
           $('#users').append($('<li>').text(users[i] + " " + money));
         }
+        sessionStorage.setItem("bank", JSON.stringify(bank))
       }
       $(function () {
         var socket = io();
