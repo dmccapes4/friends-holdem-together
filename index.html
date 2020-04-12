@@ -41,7 +41,7 @@
             }
             sessionStorage.setItem("users", JSON.stringify(users))
             while($('#users').length > 0) {
-	             $('#users').removeChild(lis[0]);
+	             $('#users').removeChild($('#users').firstChild);
             }
             for (let i = 0; i < users.length; i++) {
               $('#users').append($('<li>').text(users[i]));
