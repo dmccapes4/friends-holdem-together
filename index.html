@@ -44,6 +44,7 @@
         }
         sessionStorage.setItem("bank", JSON.stringify(bank))
       }
+
       $(function () {
         var socket = io();
         $('form').submit(function(){
@@ -68,6 +69,38 @@
               users = users.filter(e => e !== user)
               drawUsers(users)
             }
+          } else if (msg.includes("addmoney")) {
+            var splitCommand = msg.split(" ")
+            var user = splitCommand[1]
+            var amount = splitCommand[2]
+            var bank = JSON.parse(sessionStorage.getItem("bank"))
+            if (bank == null) {
+              bank = {}
+            }
+            var usersMoney = bank[user]
+            if (usersMoney == null) {
+              usersMoney = 0
+            }
+            usersMoney = usersMoney + amount
+            bank[user] = usersMoney
+            sessionStorage.setItem("bank", JSON.stringify(bank))
+            drawUsers()
+          } else if (msg.includes("removemoney")) {
+            var splitCommand = msg.split(" ")
+            var user = splitCommand[1]
+            var amount = splitCommand[2]
+            var bank = JSON.parse(sessionStorage.getItem("bank"))
+            if (bank == null) {
+              bank = {}
+            }
+            var usersMoney = bank[user]
+            if (usersMoney == null) {
+              usersMoney = 0
+            }
+            usersMoney = usersMoney - amount
+            bank[user] = usersMoney
+            sessionStorage.setItem("bank", JSON.stringify(bank))
+            drawUsers()
           }
           $('#messages').append($('<li>').text(msg));
           window.scrollTo(0, document.body.scrollHeight);
