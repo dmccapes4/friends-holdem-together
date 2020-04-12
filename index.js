@@ -8,7 +8,7 @@ app.get('/', function(req, res){
 });
 
 io.on('connection', function(socket){
-  socket.on('chat message', function(msg){
+  socket.on('chat message', function(msg) {
     io.emit('chat message', msg);
   });
 
@@ -17,9 +17,11 @@ io.on('connection', function(socket){
   });
 });
 
-app.post('/users', function(req, res){
-  io.sockets.in(req.body.user).emit('chat message', {msg: 'hello'});
-})
+app.post('/users', function(req, res) {
+  // io.sockets.in(req.body.user).emit('chat message', {msg: 'hello'});
+  res.statusCode = 200;
+  res.send("hello")
+});
 
 http.listen(port, function(){
   console.log('listening on *:' + port);
