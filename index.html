@@ -35,8 +35,8 @@
         }
         for (let i = 0; i < users.length; i++) {
           var money = 0
-          if (bank.getItem(users[i]) != null) {
-            money = bank.getItem(users[i])
+          if (bank[users[i]] != null) {
+            money = bank[users[i]]
           } else {
             bank[users[i]] = 0
           }
