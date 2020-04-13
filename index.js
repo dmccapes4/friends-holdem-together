@@ -19,6 +19,7 @@ io.on('connection', function(socket){
 
 app.post('/users', function(req, res) {
   // io.sockets.in(req.body.user).emit('chat message', {msg: 'hello'});
+  System.out.println(req.body.toString())
   res.send(req.body)
 });
 
