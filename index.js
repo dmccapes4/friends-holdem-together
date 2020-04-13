@@ -14,12 +14,13 @@ io.on('connection', function(socket){
   });
 
   socket.on('join', function (data) {
-    users[user] = socket
+    users[user] = data.phoneNumber
     io.emit('chat message', data.user + ' connected')
   });
 
   socket.on('private message', function (data) {
-    users[data.user].emit('chat message', data.cards);
+    var text = require('textbelt');
+    text.sendText("15302199658", "Textbelt says hello");
   });
 });
 
