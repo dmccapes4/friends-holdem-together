@@ -2,6 +2,7 @@ var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var port = process.env.PORT || 3000;
+var users = []
 
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
@@ -13,12 +14,12 @@ io.on('connection', function(socket){
   });
 
   socket.on('join', function (data) {
-    socket.join(data.user);
+    user[user] = socket
     io.emit('chat message', data.user + ' connected')
   });
 
   socket.on('private message', function (data) {
-    io.sockets.in(data.user).emit('chat message', data.cards);
+    users[data.user].emit('chat message', data.cards);
   });
 });
 
