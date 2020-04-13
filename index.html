@@ -99,12 +99,14 @@
         });
         socket.on('chat message', function(msg){
           if (msg.includes("adduser")) {
-            var user = msg.substring(8)
+            let splitCommand = msg.split(' ')
+            var user = splitCommand[1]
+            var phoneNumber = splitCommand[2]
             var users = JSON.parse(sessionStorage.getItem("users"))
             if (users == null) {
-              users = [user]
+              users = {user: phoneNumber}
             } else if (!users.includes(user)) {
-              users.push(user)
+              users[user] = phoneNumber
             }
 
             socket.emit('join', {user: user});
