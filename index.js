@@ -17,9 +17,8 @@ io.on('connection', function(socket){
     io.emit('chat message', data.user + ' connected')
   });
 
-  socket.on('private message', function(data) {
-    io.emit('chat message', data)
-    io.sockets.in(data.user).emit('chat message', {msg: data.cards});
+  socket.on('private message', function (data) {
+    io.sockets.in(data.user).emit('chat message', data.cards);
   });
 });
 

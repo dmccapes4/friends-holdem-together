@@ -38,8 +38,7 @@
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
     <script>
-      function deal() {
-        var socket = io();
+      function deal(socket) {
         var deck = []
         var suits = ["Clubs","Spades","Hearts","Diamonds"]
         var cards = ["Ace","King","Queen","Jack","Ten","Nine","Eight","Seven","Six","Five","Four","Three","Two"]
@@ -153,7 +152,7 @@
             sessionStorage.setItem("bank", JSON.stringify(bank))
             drawUsers()
           } else if (msg.includes("deal")) {
-            deal()
+            deal(socket)
           }
           $('#messages').append($('<li>').text(msg));
           window.scrollTo(0, document.body.scrollHeight);
