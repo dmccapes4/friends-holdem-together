@@ -39,6 +39,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
     <script>
       function deal() {
+        var socket = io();
         var deck = []
         var suits = ["Clubs","Spades","Hearts","Diamonds"]
         var cards = ["Ace","King","Queen","Jack","Ten","Nine","Eight","Seven","Six","Five","Four","Three","Two"]
@@ -57,6 +58,7 @@
               table[users[i]] = deck.pop() + ", "
             } else {
               table[users[i]] += deck.pop()
+              socket.emit('private message', {cards: table[users[i]], user: users[i]})
             }
           }
         }
@@ -105,22 +107,9 @@
             } else if (!users.includes(user)) {
               users.push(user)
             }
-            // const axios = require('axios')
+
             socket.emit('join', {user: user});
-              // const params = new URLSearchParams();
-              // params.append('user', user);
-              // axios({
-              //   method: 'post',
-              //   url: 'https://friends-holdem-together.herokuapp.com/users',
-              //   data: params
-              // })
-              // .then(res => {
-              //   console.log(`statusCode: ${res.statusCode}`)
-              //   console.log(res)
-              // })
-              // .catch(error => {
-              //   console.error(error)
-              // })
+
             sessionStorage.setItem("users", JSON.stringify(users))
             drawUsers()
           } else if (msg.includes("removeuser")) {
