@@ -14,13 +14,13 @@ io.on('connection', function(socket){
 
   socket.on('join', function (data) {
     socket.join(data.user);
+    io.emit('chat message', data.user + ' connected')
   });
 });
 
 app.post('/users', function(req, res) {
   // io.sockets.in(req.body.user).emit('chat message', {msg: 'hello'});
-  System.out.println(req.body.toString())
-  res.send(req.body)
+  res.send("hello")
 });
 
 http.listen(port, function(){
