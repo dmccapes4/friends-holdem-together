@@ -14,7 +14,7 @@ io.on('connection', function(socket){
   });
 
   socket.on('join', function (data) {
-    // user[user] = socket
+    users[user] = socket
     io.emit('chat message', data.user + ' connected')
   });
 
