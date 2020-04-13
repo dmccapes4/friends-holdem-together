@@ -16,13 +16,17 @@ io.on('connection', function(socket){
     socket.join(data.user);
     io.emit('chat message', data.user + ' connected')
   });
+
+  socket.on('private message', function(msg, user) {
+    io.sockets.in(user).emit('chat message', {msg: msg});
+  });
 });
 
-app.post('/users', function(req, res) {
-  // io.sockets.in(req.body.user).emit('chat message', {msg: 'hello'});
-  io.emit('chat message', req)
-  res.send("hello")
-});
+// app.post('/users', function(req, res) {
+//   // io.sockets.in(req.body.user).emit('chat message', {msg: 'hello'});
+//   io.emit('chat message', req)
+//   res.send("hello")
+// });
 
 http.listen(port, function(){
   console.log('listening on *:' + port);
